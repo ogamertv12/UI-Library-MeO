@@ -2016,3 +2016,4 @@ function library:AddWindow(title, options)
 end
 
 do
+	end
