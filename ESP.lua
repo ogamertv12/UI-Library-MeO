@@ -1,5 +1,5 @@
 local players = game:GetService("Players")
-local camera = workspace.CurrentCamera
+local camera = workspace.Camera
 local espcolor = Color3.fromRGB(59, 153, 253)
 local boxesp = false
 local nameesp = false
