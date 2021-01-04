@@ -24,7 +24,7 @@ game:GetService("RunService").Stepped:Connect(
                         v.Name ~= game:GetService("Players").LocalPlayer.Name and
                             v.Name ~= game.Players.LocalPlayer.Name and
                             v.Character and
-                            v.Character:FindFirstChild("Head") and
+                            v.Character:FindFirstChild("Head")
                     then
                         if not ESPMain[v.Name] then
                             ESPMain[v.Name] = {
