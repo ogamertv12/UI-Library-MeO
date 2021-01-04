@@ -1,9 +1,13 @@
 local players = game:GetService("Players")
 local camera = workspace.CurrentCamera
 local espcolor = Color3.fromRGB(59, 153, 253)
+local boxesp = false
 local nameesp = false
+local BoxFilled = false
 local gs = game:GetService("GuiService"):GetGuiInset()
 local ESPMain = {}
+local tracers = false
+local teamcheck = false
 
 createlabel = function(text)
     local label = Drawing.new("Text")
@@ -15,17 +19,27 @@ createlabel = function(text)
     return label
 end
 
+local player = players.LocalPlayer
+function isInTeam(char)
+    if teamcheck == true then
+        if player and players:GetPlayerFromCharacter(char) and players:GetPlayerFromCharacter(char).Team and player.Team then
+            if players:GetPlayerFromCharacter(char).Team ~= player.Team then
+                return false
+            else
+                return (player.Team == players:GetPlayerFromCharacter(char).Team)
+            end
+        end
+    else
+        return false
+    end
+end
+
 game:GetService("RunService").Stepped:Connect(
     function()
         spawn(
             function()
                 for i, v in pairs((game:GetService("Players")):GetChildren()) do
-                    if
-                        v.Name ~= game:GetService("Players").LocalPlayer.Name and
-                            v.Name ~= game.Players.LocalPlayer.Name and
-                            v.Character and
-                            v.Character:FindFirstChild("Head")
-                    then
+                    if v.Name ~= game:GetService("Players").LocalPlayer.Name and v.Name ~= game.Players.LocalPlayer.Name and v.Character and v.Character:FindFirstChild("Head") and v.Character then
                         if not ESPMain[v.Name] then
                             ESPMain[v.Name] = {
                                 v.Character
@@ -61,9 +75,9 @@ game:GetService("RunService").Stepped:Connect(
                     end
                 end
             end
-        )
+        end)
     end
-)
+end)
 
 players.PlayerRemoving:Connect(
     function(plr)
